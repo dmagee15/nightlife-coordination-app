@@ -3,7 +3,7 @@
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, yelp) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -16,13 +16,27 @@ module.exports = function (app, passport) {
 	var clickHandler = new ClickHandler();
 
 	app.route('/')
-		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/index.html');
+		.get(function (req, res) {
+			res.render('homepage');
 		});
 
 	app.route('/login')
 		.get(function (req, res) {
 			res.sendFile(path + '/public/login.html');
+		});
+		
+	app.route('/search')
+		.post(function(req,res){
+			yelp.search({term: 'food', location: req.body.location, price: '1,2,3', limit: 10})
+			.then(function (data) {
+				 console.log(JSON.parse(data).businesses[0]);
+				 res.render('search', {
+				 	results: JSON.parse(data).businesses
+				 });
+			})
+			.catch(function (err) {
+    			console.error(err);
+			});	
 		});
 
 	app.route('/logout')

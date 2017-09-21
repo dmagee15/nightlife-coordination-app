@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title Nightlife Coordination App
+    link(href='/public/css/main.css', rel='stylesheet', type='text/css')
+  body
+    .main
+        for result in results
+            .resultRecord(style='background-image:url("'+result.image_url+'")')
+                p= result.name
