@@ -4,7 +4,39 @@ html
     title Nightlife Coordination App
     link(href='/public/css/main.css', rel='stylesheet', type='text/css')
   body
-    .main
+    .searchWindow
         for result in results
-            .resultRecord(style='background-image:url("'+result.image_url+'")')
-                p= result.name
+            .resultRecord
+                .resultRecordHeader
+                    p= result.name
+                .resultRecordImage(style='background-image:url("'+result.image_url+'")')
+                .yelpRating
+                  p.yelpRatingReviews= result.review_count+' Reviews'
+                  if result.rating == 1
+                    img.yelpRatingImage(src='../public/img/small_1.png')
+                  else
+                  if result.rating == 1.5
+                    img.yelpRatingImage(src='../public/img/small_1_half.png')
+                  else
+                  if result.rating == 2
+                    img.yelpRatingImage(src='../public/img/small_2.png')
+                  else
+                  if result.rating == 2.5
+                    img.yelpRatingImage(src='../public/img/small_2_half.png')
+                  else
+                  if result.rating == 3
+                    img.yelpRatingImage(src='../public/img/small_3.png')
+                  else
+                  if result.rating == 3.5
+                    img.yelpRatingImage(src='../public/img/small_3_half.png')
+                  else
+                  if result.rating == 4.0
+                    img.yelpRatingImage(src='../public/img/small_4.png')
+                  else
+                  if result.rating == 4.5
+                    img.yelpRatingImage(src='../public/img/small_4_half.png')
+                  else
+                  if result.rating == 5
+                    img.yelpRatingImage(src='../public/img/small_5.png')
+                .barInfo
+                .toAttend
