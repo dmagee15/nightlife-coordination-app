@@ -38,5 +38,17 @@ html
                   else
                   if result.rating == 5
                     img.yelpRatingImage(src='../public/img/small_5.png')
-                .barInfo
+                hr
+                .price
+                  p Price
+                  p= result.price
+                .distance
+                  p Distance
+                  p= result.distance+" M"
                 .toAttend
+                  .rsvpButton(onclick='openRsvpWindow()')
+                    p RSVP
+        .rsvpWindow(id='rsvpWindowId')
+            .rsvpWindowHeader
+                .exitButton(onclick='closeRsvpWindow()')
+    script(src="./controllers/rsvpWindowController.client.js")

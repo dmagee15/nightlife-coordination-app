@@ -27,11 +27,16 @@ module.exports = function (app, passport, yelp) {
 		
 	app.route('/search')
 		.post(function(req,res){
-			yelp.search({term: 'food', location: req.body.location, price: '1,2,3', limit: 10})
+			yelp.search({term: 'food', location: req.body.location, price: '1,2,3', limit: 15})
 			.then(function (data) {
 				 console.log(JSON.parse(data).businesses[0]);
+				 var adjustedData = JSON.parse(data).businesses;
+				 var length = adjustedData.length;
+				 for(var x=0;x<length;x++){
+				 	adjustedData[x].distance = Math.floor(adjustedData[x].distance);
+				 }
 				 res.render('search', {
-				 	results: JSON.parse(data).businesses
+				 	results: adjustedData
 				 });
 			})
 			.catch(function (err) {

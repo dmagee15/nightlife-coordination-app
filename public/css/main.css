@@ -230,7 +230,7 @@ span {
 .resultRecord{
 	display:inline-block;
 	width:250px;
-	height:350px;
+	height:335px;
 	box-shadow: 2px 4px 6px 0px;
 	margin:10px;
 	vertical-align:top;
@@ -246,6 +246,9 @@ span {
 	color:white;
 	font-size:20px;
 	padding-bottom:10px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
 }
 .resultRecordImage{
 	background-size:cover;
@@ -257,6 +260,7 @@ span {
 	width:100%;
 	background-color:white;
 	text-align:center;
+	position:relative;
 }
 .yelpRating{
 	height:20px;
@@ -273,15 +277,77 @@ span {
 	margin:0;
 	padding:0;
 }
-.barInfo{
-	background-color:red;
-	width:175px;
-	height:85px;
+.price{
+	width:85px;
+	height:69px;
 	display:inline-block;
+	overflow:hidden;
+	text-align:center;
+}
+.price p{
+	margin:0;
+	padding:0;
+	font-size:14px;
+	margin-top:10px;
+}
+.distance{
+	width:90px;
+	height:69px;
+	display:inline-block;
+	overflow:hidden;
+	text-align:center;
+}
+.distance p{
+	margin:0;
+	padding:0;
+	margin-top:10px;
+	font-size:14px;
+	white-space: nowrap;
+  	overflow: hidden;
 }
 .toAttend{
-	background-color:blue;
 	width:75px;
-	height:85px;
+	height:69px;
 	display:inline-block;
+	overflow:hidden;
+}
+.rsvpButton{
+	margin:12px auto 0 auto;
+	width:50px;
+	height:40px;
+	background-color:darkblue;
+	border-radius:15px;
+	overflow:hidden;
+	box-shadow:3px 3px 3px 0;
+}
+.rsvpButton p{
+	margin:0;
+	padding-top:10px;
+	font-size:14px;
+	color:white;
+}
+.resultRecord hr{
+	margin:0;
+}
+.rsvpWindow{
+	position:fixed;
+	height:500px;
+	width:500px;
+	left:50%;
+	top:100px;
+	transform:translateX(-50%);
+	background:rgba(1,1,1,.2);
+	margin:auto;
+	display:none;
+}
+.rsvpWindowHeader{
+	background-color:darkblue;
+	width:100%;
+	height:20px;
+}
+.exitButton{
+	height:20px;
+	background-color:black;
+	width:20px;
+	float:right;
 }
