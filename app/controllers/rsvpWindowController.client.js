@@ -1,8 +1,19 @@
 console.log("Script executed");
-
-function openRsvpWindow(){
-    document.getElementById('rsvpWindowId').style.display = "inline-block";
+var searchResults = JSON.parse(data).businesses;
+var length = searchResults.length;
+function openRsvpWindow(index){
+    console.log(searchResults[Number(index)].id);
+    $('.rsvpWindow').fadeIn('slow');
+    $('.rsvpWindowContainer').fadeIn('slow');
+//    document.getElementById('rsvpWindowContainerId').style.display = "inline-block";
 }
+
+$('.rsvpWindowContainer').on('click',function(){
+   $('.rsvpWindow').fadeOut('slow');
+   $('.rsvpWindowContainer').fadeOut('slow');
+});
+
 function closeRsvpWindow(){
-    document.getElementById('rsvpWindowId').style.display = "none";
+
+//    document.getElementById('rsvpWindowId').style.display = "none";
 }

@@ -329,6 +329,18 @@ span {
 .resultRecord hr{
 	margin:0;
 }
+.rsvpWindowContainer{
+	position:fixed;
+	height:100vh;
+	width:100%;
+	left:50%;
+	top:0;
+	transform:translateX(-50%);
+	background:rgba(1,1,1,.4);
+	margin:auto;
+	display:none;
+	z-index:1;
+}
 .rsvpWindow{
 	position:fixed;
 	height:500px;
@@ -336,9 +348,10 @@ span {
 	left:50%;
 	top:100px;
 	transform:translateX(-50%);
-	background:rgba(1,1,1,.2);
+	background-color:white;
 	margin:auto;
 	display:none;
+	z-index:2;
 }
 .rsvpWindowHeader{
 	background-color:darkblue;
@@ -350,4 +363,32 @@ span {
 	background-color:black;
 	width:20px;
 	float:right;
+}
+.rsvpWindowMap{
+	width:100%;
+	height:380px;
+	background-color:orange;
+}
+.rsvpWindowInfo{
+	width:100%;
+	height:120px;
+}
+.rsvpWindowInfoHeader{
+	height:20px;
+	width:100%;
+	overflow:hidden;
+	background-color:red;
+}
+.rsvpWindowInfoLeft{
+	height:100px;
+	width:70%;
+	background-color:blue;
+	display:inline-block;
+	overflow:hidden;
+}
+.rsvpWindowInfoRight{
+	height:100px;
+	width:30%;
+	background-color:green;
+	display:inline-block;
 }

@@ -4,8 +4,9 @@ html
     title Nightlife Coordination App
     link(href='/public/css/main.css', rel='stylesheet', type='text/css')
   body
+    script(src="./controllers/jquery-3.2.1.min.js")
     .searchWindow
-        for result in results
+        for result, index in results
             .resultRecord
                 .resultRecordHeader
                     p= result.name
@@ -46,9 +47,19 @@ html
                   p Distance
                   p= result.distance+" M"
                 .toAttend
-                  .rsvpButton(onclick='openRsvpWindow()')
+                  .rsvpButton(onclick='openRsvpWindow('+index+')')
                     p RSVP
+        .rsvpWindowContainer(id='rsvpWindowContainerId')  
         .rsvpWindow(id='rsvpWindowId')
-            .rsvpWindowHeader
-                .exitButton(onclick='closeRsvpWindow()')
+          .rsvpWindowHeader
+            .exitButton(onclick='closeRsvpWindow()')
+          .rsvpWindowMap
+          .rsvpWindowInfo
+            .rsvpWindowInfoLeft
+              .rsvpWindowInfoHeader
+                p.yelpRatingReviews 3 Reviews
+                img.yelpRatingImage(src='../public/img/small_1.png')
+            .rsvpWindowInfoRight
+    script(type='text/javascript').
+      var data = !{JSON.stringify(raw)}
     script(src="./controllers/rsvpWindowController.client.js")
