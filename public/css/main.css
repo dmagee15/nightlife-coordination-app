@@ -210,6 +210,16 @@ span {
 	text-align:center;
 	overflow:hidden;
 }
+.mainHeader{
+	width:100%;
+	height:40px;
+	text-align:right;
+}
+.mainHeader h3{
+	margin:0;
+	padding: 5px 50px 0 0;
+	color:black;
+}
 .main h1{
 	color:white;
 	padding-top:150px;
@@ -217,11 +227,11 @@ span {
 #location{
 	width:400px;
 }
-#loginButton{
+.loginButton{
 	text-decoration:none;
 	color:white;
 }
-#loginButton h2{
+.loginButton h2{
 	background-color:black;
 	display:inline-block;
 	padding:5px 15px 5px 15px;
@@ -377,18 +387,57 @@ span {
 	height:20px;
 	width:100%;
 	overflow:hidden;
-	background-color:red;
+	border-bottom:1px solid black;
 }
 .rsvpWindowInfoLeft{
 	height:100px;
 	width:70%;
-	background-color:blue;
 	display:inline-block;
 	overflow:hidden;
 }
 .rsvpWindowInfoRight{
 	height:100px;
 	width:30%;
-	background-color:green;
 	display:inline-block;
+	overflow:hidden;
+}
+.infoTitle{
+	font-size:15px;
+	font-family:"Arial Black";
+	color:gray;
+	margin-top: 3px;
+	padding:0;
+}
+.address{
+	width:50%;
+	display:inline-block;
+}
+.addressOne{
+	font-size:12px;
+}
+.addressTwo{
+	font-size:12px;
+}
+.contact{
+	width:50%;
+	display:inline-block;
+	vertical-align:top;
+}
+.infoPhone{
+	font-size:12px;
+}
+.confirmButton{
+	margin:25px auto 0 auto;
+	width:65px;
+	height:50px;
+	background-color:darkblue;
+	border-radius:15px;
+	overflow:hidden;
+	box-shadow:3px 3px 3px 0;
+}
+.confirmButton p{
+	margin:0;
+	padding-top:15px;
+	font-size:14px;
+	color:white;
 }

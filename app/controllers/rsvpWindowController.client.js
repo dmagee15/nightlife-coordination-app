@@ -1,5 +1,6 @@
 console.log("Script executed");
 var searchResults = JSON.parse(data).businesses;
+console.log(searchResults[0]);
 var length = searchResults.length;
 function openRsvpWindow(index){
     console.log(searchResults[Number(index)].id);

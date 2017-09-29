@@ -5,9 +5,17 @@ html
     link(href='/public/css/main.css', rel='stylesheet', type='text/css')
   body
     .main
+        .mainHeader
+          if user != null
+            h3 Welcome, 
+              span(style='color:lightblue') #{user.google.displayName}!
         h1 Plan your nights out. Coordinate with Friends.
         form#locationForm(action='/search', method='POST')
             input#location(type='text', name='location', placeholder='Where are you located?')
             input#locationSubmit(type='submit', value='Search')
-        a(href="/login", id="loginButton")
-          h2 Login
+        if user != null
+          a.loginButton(href="/logout")
+            h2 Logout
+        else
+          a.loginButton(href="/login")
+            h2 Login

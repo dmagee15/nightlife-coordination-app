@@ -59,7 +59,16 @@ html
               .rsvpWindowInfoHeader
                 p.yelpRatingReviews 3 Reviews
                 img.yelpRatingImage(src='../public/img/small_1.png')
+              .address
+                p.infoTitle Address
+                p.addressOne 13432 Bluffingpalls Lane
+                p.addressTwo Houston TX, 77043
+              .contact
+                p.infoTitle Contact
+                p.infoPhone (713) 241-3948
             .rsvpWindowInfoRight
+              .confirmButton
+                  p Confirm
     script(type='text/javascript').
       var data = !{JSON.stringify(raw)}
     script(src="./controllers/rsvpWindowController.client.js")

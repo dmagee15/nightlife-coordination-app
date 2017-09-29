@@ -17,7 +17,10 @@ module.exports = function (app, passport, yelp) {
 
 	app.route('/')
 		.get(function (req, res) {
-			res.render('homepage');
+			console.log(req.user);
+			res.render('homepage', {
+				user: req.user
+			});
 		});
 
 	app.route('/login')
@@ -49,7 +52,7 @@ module.exports = function (app, passport, yelp) {
 	app.route('/logout')
 		.get(function (req, res) {
 			req.logout();
-			res.redirect('/login');
+			res.redirect('/');
 		});
 
 	app.route('/profile')
@@ -62,11 +65,11 @@ module.exports = function (app, passport, yelp) {
 			res.json(req.user.github);
 		});
 
-	app.route('/auth/github')
-		.get(passport.authenticate('github'));
+	app.route('/auth/google')
+		.get(passport.authenticate('google', { scope: ['profile'] }));
 
-	app.route('/auth/github/callback')
-		.get(passport.authenticate('github', {
+	app.route('/oauth2callback')
+		.get(passport.authenticate('google', {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));

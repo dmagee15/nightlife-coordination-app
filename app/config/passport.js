@@ -1,6 +1,6 @@
 'use strict';
 
-var GitHubStrategy = require('passport-github').Strategy;
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var User = require('../models/users');
 var configAuth = require('./auth');
 
@@ -14,15 +14,15 @@ module.exports = function (passport) {
 			done(err, user);
 		});
 	});
+	
 
-	passport.use(new GitHubStrategy({
-		clientID: configAuth.githubAuth.clientID,
-		clientSecret: configAuth.githubAuth.clientSecret,
-		callbackURL: configAuth.githubAuth.callbackURL
+/*	passport.use(new GooglePlusStrategy({
+		clientID: configAuth.googleAuth.clientID,
+		clientSecret: configAuth.googleAuth.clientSecret,
 	},
 	function (token, refreshToken, profile, done) {
 		process.nextTick(function () {
-			User.findOne({ 'github.id': profile.id }, function (err, user) {
+			User.findOne({ 'google.id': profile.id }, function (err, user) {
 				if (err) {
 					return done(err);
 				}
@@ -32,11 +32,10 @@ module.exports = function (passport) {
 				} else {
 					var newUser = new User();
 
-					newUser.github.id = profile.id;
-					newUser.github.username = profile.username;
-					newUser.github.displayName = profile.displayName;
-					newUser.github.publicRepos = profile._json.public_repos;
-					newUser.nbrClicks.clicks = 0;
+					newUser.google.id = profile.id;
+					newUser.google.username = profile.username;
+					newUser.google.displayName = profile.displayName;
+					newUser.google.publicRepos = profile._json.public_repos;
 
 					newUser.save(function (err) {
 						if (err) {
@@ -48,5 +47,39 @@ module.exports = function (passport) {
 				}
 			});
 		});
-	}));
+	}));*/
+	
+	passport.use(new GoogleStrategy({
+    clientID: configAuth.googleAuth.clientID,
+    clientSecret: configAuth.googleAuth.clientSecret,
+    callbackURL: "https://nightlife-coordination-app-dmagee15.c9users.io/oauth2callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOne({ 'google.id': profile.id }, function (err, user) {
+				if (err) {
+					return cb(err);
+				}
+
+				if (user) {
+					return cb(null, user);
+				} else {
+					var newUser = new User();
+
+					newUser.google.id = profile.id;
+					newUser.google.username = profile.username;
+					newUser.google.displayName = profile.displayName;
+					newUser.google.publicRepos = profile._json.public_repos;
+
+					newUser.save(function (err) {
+						if (err) {
+							throw err;
+						}
+
+						return cb(null, newUser);
+					});
+				}
+			});
+  }
+));
+	
 };
