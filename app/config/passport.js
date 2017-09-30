@@ -68,7 +68,6 @@ module.exports = function (passport) {
 					newUser.google.id = profile.id;
 					newUser.google.username = profile.username;
 					newUser.google.displayName = profile.displayName;
-					newUser.google.publicRepos = profile._json.public_repos;
 
 					newUser.save(function (err) {
 						if (err) {

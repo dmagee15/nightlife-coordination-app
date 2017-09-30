@@ -285,7 +285,8 @@ span {
 	display:inline-block;
 	font-size:14px;
 	margin:0;
-	padding:0;
+	padding-left:10px;
+	float:left;
 }
 .price{
 	width:85px;
