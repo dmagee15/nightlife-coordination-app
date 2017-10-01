@@ -376,9 +376,8 @@ span {
 	float:right;
 }
 .rsvpWindowMap{
-	width:100%;
-	height:380px;
-	background-color:orange;
+	width:500px;
+	height:380px; 
 }
 .rsvpWindowInfo{
 	width:100%;

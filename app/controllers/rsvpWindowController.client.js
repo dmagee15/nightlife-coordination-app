@@ -2,6 +2,24 @@ console.log("Script executed");
 var searchResults = JSON.parse(data).businesses;
 console.log(searchResults[0]);
 var length = searchResults.length;
+var latitude = 0;
+var longitude = 0;
+
+function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: latitude, lng: longitude},
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+             }       
+        });
+        var marker = new google.maps.Marker({
+          position: {lat: latitude, lng: longitude},
+          map: map
+        });
+
+      }
 
 
 function openRsvpWindow(index){
@@ -24,6 +42,14 @@ function openRsvpWindow(index){
     }
     $('.rsvpWindow').fadeIn('slow');
     $('.rsvpWindowContainer').fadeIn('slow');
+    latitude = searchResults[indexNum].coordinates.latitude;
+    longitude = searchResults[indexNum].coordinates.longitude;
+    var head= document.getElementsByTagName('head')[0];
+    var script= document.createElement('script');
+    script.type= 'text/javascript';
+    script.src= 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC1munvl4oBFHvOEqxudlejjo_HNMeh4pQ&callback=initMap';
+    head.appendChild(script);
+    
 //    document.getElementById('rsvpWindowContainerId').style.display = "inline-block";
 }
 
