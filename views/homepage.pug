@@ -8,7 +8,7 @@ html
         .mainHeader
           if user != null
             h3 Welcome, 
-              span(style='color:lightblue') #{user.google.displayName}!
+              span(style='color:lightblue') #{user.displayName}!
         h1 Plan your nights out. Coordinate with Friends.
         form#locationForm(action='/search', method='POST')
             input#location(type='text', name='location', placeholder='Where are you located?')

@@ -1,9 +1,24 @@
 console.log("Script executed");
-var searchResults = JSON.parse(data).businesses;
+var searchResults = JSON.parse(rawData).businesses;
 console.log(searchResults[0]);
 var length = searchResults.length;
 var latitude = 0;
 var longitude = 0;
+var currentIndex = 0;
+
+function confirmRsvp(){
+    console.log(currentIndex+" "+searchResults[currentIndex].id);
+    
+    $.ajax({
+        url:'/confirmRsvp',
+        type:'post',
+        data:'value='+searchResults[currentIndex].id,
+        success:function(serverData){
+            console.log("client received response");
+            console.log(serverData);
+        }
+    });
+}
 
 function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -24,6 +39,7 @@ function initMap() {
 
 function openRsvpWindow(index){
     var indexNum = Number(index);
+    currentIndex = indexNum;
     console.log(searchResults[Number(index)]);
     $('.addressOne').html(searchResults[indexNum].location.address1)
     $('.addressTwo').html(searchResults[indexNum].location.city+', '+searchResults[indexNum].location.zip_code);

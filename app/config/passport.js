@@ -35,7 +35,6 @@ module.exports = function (passport) {
 					newUser.google.id = profile.id;
 					newUser.google.username = profile.username;
 					newUser.google.displayName = profile.displayName;
-					newUser.google.publicRepos = profile._json.public_repos;
 
 					newUser.save(function (err) {
 						if (err) {
@@ -55,7 +54,7 @@ module.exports = function (passport) {
     callbackURL: "https://nightlife-coordination-app-dmagee15.c9users.io/oauth2callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOne({ 'google.id': profile.id }, function (err, user) {
+    User.findOne({ 'id': profile.id }, function (err, user) {
 				if (err) {
 					return cb(err);
 				}
@@ -65,9 +64,9 @@ module.exports = function (passport) {
 				} else {
 					var newUser = new User();
 
-					newUser.google.id = profile.id;
-					newUser.google.username = profile.username;
-					newUser.google.displayName = profile.displayName;
+					newUser.id = profile.id;
+					newUser.username = profile.username;
+					newUser.displayName = profile.displayName;
 
 					newUser.save(function (err) {
 						if (err) {

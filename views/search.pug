@@ -67,8 +67,8 @@ html
                 p.infoTitle Contact
                 p.infoPhone (713) 241-3948
             .rsvpWindowInfoRight
-              .confirmButton
+              .confirmButton(onclick='confirmRsvp()')
                   p Confirm
     script(type='text/javascript').
-      var data = !{JSON.stringify(raw)}
+      var rawData = !{JSON.stringify(raw)}
     script(src="./controllers/rsvpWindowController.client.js")

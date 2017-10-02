@@ -2,6 +2,8 @@
 
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var RsvpHandler = require(path + '/app/controllers/rsvpHandler.server.js');
+
 
 module.exports = function (app, passport, yelp) {
 
@@ -14,7 +16,8 @@ module.exports = function (app, passport, yelp) {
 	}
 
 	var clickHandler = new ClickHandler();
-
+	var rsvpHandler = new RsvpHandler();
+	
 	app.route('/')
 		.get(function (req, res) {
 			console.log(req.user);
@@ -73,6 +76,9 @@ module.exports = function (app, passport, yelp) {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));
+		
+	app.route('/confirmRsvp')
+		.post(isLoggedIn, rsvpHandler.confirmRsvp);
 
 	app.route('/api/:id/clicks')
 		.get(isLoggedIn, clickHandler.getClicks)
