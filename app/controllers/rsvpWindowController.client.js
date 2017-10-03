@@ -1,14 +1,17 @@
 console.log("Script executed");
 var searchResults = JSON.parse(rawData).businesses;
-console.log(searchResults[0]);
+console.log(rsvpArray);
 var length = searchResults.length;
 var latitude = 0;
 var longitude = 0;
 var currentIndex = 0;
+var firstMap = true;
+var marker;
+var map;
 
 function confirmRsvp(){
     console.log(currentIndex+" "+searchResults[currentIndex].id);
-    
+//    $('.confirmButton')
     $.ajax({
         url:'/confirmRsvp',
         type:'post',
@@ -16,12 +19,22 @@ function confirmRsvp(){
         success:function(serverData){
             console.log("client received response");
             console.log(serverData);
+            rsvpArray[currentIndex] = (true)?false:true;
+            var idString = '#rsvp'+currentIndex;
+            if($(idString).hasClass('rsvpButton')){
+                $(idString).removeClass('rsvpButton').addClass('rsvpButtonActive');
+                $('#confirm').removeClass('confirmButton').addClass('confirmButtonActive');
+            }
+            else{
+                $(idString).removeClass('rsvpButtonActive').addClass('rsvpButton');
+                $('#confirm').removeClass('confirmButtonActive').addClass('confirmButton');
+            }
         }
     });
 }
 
 function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           zoom: 12,
           center: {lat: latitude, lng: longitude},
             mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -29,7 +42,7 @@ function initMap() {
                 style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
              }       
         });
-        var marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
           position: {lat: latitude, lng: longitude},
           map: map
         });
@@ -45,6 +58,12 @@ function openRsvpWindow(index){
     $('.addressTwo').html(searchResults[indexNum].location.city+', '+searchResults[indexNum].location.zip_code);
     $('.infoPhone').html(searchResults[indexNum].display_phone)
     $('#windowRatingReviews').html(searchResults[indexNum].review_count+" Reviews");
+    if(rsvpArray[indexNum]==true){
+        $('#confirm').removeClass('confirmButton').addClass('confirmButtonActive');
+    }
+    else{
+        $('#confirm').removeClass('confirmButtonActive').addClass('confirmButton');
+    }
     switch(searchResults[indexNum].rating){
         case 1: $('#windowRatingImage').attr('src','../public/img/small_1.png'); break;
         case 1.5: $('#windowRatingImage').attr('src','../public/img/small_1_half.png'); break;
@@ -60,12 +79,22 @@ function openRsvpWindow(index){
     $('.rsvpWindowContainer').fadeIn('slow');
     latitude = searchResults[indexNum].coordinates.latitude;
     longitude = searchResults[indexNum].coordinates.longitude;
+    if(firstMap){
+    firstMap = false;
     var head= document.getElementsByTagName('head')[0];
     var script= document.createElement('script');
     script.type= 'text/javascript';
     script.src= 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC1munvl4oBFHvOEqxudlejjo_HNMeh4pQ&callback=initMap';
     head.appendChild(script);
-    
+    }
+    else{
+        marker.setMap(null);
+        marker = new google.maps.Marker({
+          position: {lat: latitude, lng: longitude},
+          map: map
+        });
+        map.setCenter(new google.maps.LatLng(latitude,longitude));
+    }
 //    document.getElementById('rsvpWindowContainerId').style.display = "inline-block";
 }
 

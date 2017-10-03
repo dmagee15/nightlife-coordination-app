@@ -10,7 +10,7 @@ module.exports = function (passport) {
 	});
 
 	passport.deserializeUser(function (id, done) {
-		User.findById(id, function (err, user) {
+		User.findOne({'id':id}, function (err, user) {
 			done(err, user);
 		});
 	});
@@ -63,7 +63,7 @@ module.exports = function (passport) {
 					return cb(null, user);
 				} else {
 					var newUser = new User();
-
+					console.log("PROFILEID: "+profile.id);
 					newUser.id = profile.id;
 					newUser.username = profile.username;
 					newUser.displayName = profile.displayName;

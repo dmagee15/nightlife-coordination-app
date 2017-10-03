@@ -3,7 +3,7 @@
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var RsvpHandler = require(path + '/app/controllers/rsvpHandler.server.js');
-
+var Users = require('../models/users.js');
 
 module.exports = function (app, passport, yelp) {
 
@@ -39,13 +39,39 @@ module.exports = function (app, passport, yelp) {
 				 var length = adjustedData.length;
 				 for(var x=0;x<length;x++){
 				 	adjustedData[x].distance = Math.floor(adjustedData[x].distance);
-				 	adjustedData[x].id = adjustedData[x].id.replace(/-/g, "");
 				 }
-//				 console.log(adjustedData[0]);
-				 res.render('search', {
+				 
+			var resultArray = [];
+			Users
+			.find({'displayName':req.user.displayName}, function(err,mondata){
+				if(err)throw err;
+				console.log("MONGOOSE: "+mondata[0].rsvp);
+				length = mondata[0].rsvp.length;
+				var lengthSearchData = adjustedData.length;
+				console.log("SearchDataLength: "+lengthSearchData);
+
+				for(var y=0;y<lengthSearchData;y++){
+					resultArray.push(false);
+					for(var x=0;x<length;x++){
+						if(mondata[0].rsvp[x]==adjustedData[y].id){
+							resultArray[y] = true;
+						}
+					}
+				}
+				
+				for(var q=0;q<lengthSearchData;q++){
+					adjustedData[q].rsvpflag = resultArray[q];
+				}
+				
+				
+				res.render('search', {
 				 	results: adjustedData,
-				 	raw: data
+				 	raw: data,
+				 	rsvp: JSON.stringify(resultArray)
 				 });
+			});
+				 
+				 
 			})
 			.catch(function (err) {
     			console.error(err);

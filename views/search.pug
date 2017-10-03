@@ -47,8 +47,12 @@ html
                   p Distance
                   p= result.distance+" M"
                 .toAttend
-                  .rsvpButton(onclick='openRsvpWindow('+index+')')
-                    p RSVP
+                  if result.rsvpflag == false
+                    .rsvpButton(id='rsvp'+index onclick='openRsvpWindow('+index+')')
+                      p RSVP
+                  else
+                    .rsvpButtonActive(id='rsvp'+index onclick='openRsvpWindow('+index+')')
+                      p RSVP
         .rsvpWindowContainer(id='rsvpWindowContainerId')  
         .rsvpWindow(id='rsvpWindowId')
           .rsvpWindowHeader
@@ -67,8 +71,10 @@ html
                 p.infoTitle Contact
                 p.infoPhone (713) 241-3948
             .rsvpWindowInfoRight
-              .confirmButton(onclick='confirmRsvp()')
+              #confirm.confirmButton(onclick='confirmRsvp()')
                   p Confirm
     script(type='text/javascript').
       var rawData = !{JSON.stringify(raw)}
+    script(type='text/javascript').
+      var rsvpArray = #{rsvp}
     script(src="./controllers/rsvpWindowController.client.js")
