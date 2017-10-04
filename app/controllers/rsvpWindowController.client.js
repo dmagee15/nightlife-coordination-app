@@ -21,13 +21,16 @@ function confirmRsvp(){
             console.log(serverData);
             rsvpArray[currentIndex] = (true)?false:true;
             var idString = '#rsvp'+currentIndex;
+            var rsvpNumberString = '#rsvpNumber'+currentIndex;
             if($(idString).hasClass('rsvpButton')){
                 $(idString).removeClass('rsvpButton').addClass('rsvpButtonActive');
                 $('#confirm').removeClass('confirmButton').addClass('confirmButtonActive');
+                $(rsvpNumberString).html(Number($(rsvpNumberString).text())+1);
             }
             else{
                 $(idString).removeClass('rsvpButtonActive').addClass('rsvpButton');
                 $('#confirm').removeClass('confirmButtonActive').addClass('confirmButton');
+                $(rsvpNumberString).html(Number($(rsvpNumberString).text())-1);
             }
         }
     });

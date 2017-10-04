@@ -49,9 +49,11 @@ html
                 .toAttend
                   if result.rsvpflag == false
                     .rsvpButton(id='rsvp'+index onclick='openRsvpWindow('+index+')')
+                      p(id='rsvpNumber'+index)= result.votes
                       p RSVP
                   else
                     .rsvpButtonActive(id='rsvp'+index onclick='openRsvpWindow('+index+')')
+                      p(id='rsvpNumber'+index)= result.votes
                       p RSVP
         .rsvpWindowContainer(id='rsvpWindowContainerId')  
         .rsvpWindow(id='rsvpWindowId')

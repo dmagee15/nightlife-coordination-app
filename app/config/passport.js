@@ -63,10 +63,10 @@ module.exports = function (passport) {
 					return cb(null, user);
 				} else {
 					var newUser = new User();
-					console.log("PROFILEID: "+profile.id);
 					newUser.id = profile.id;
 					newUser.username = profile.username;
 					newUser.displayName = profile.displayName;
+					newUser.search = 0;
 
 					newUser.save(function (err) {
 						if (err) {
