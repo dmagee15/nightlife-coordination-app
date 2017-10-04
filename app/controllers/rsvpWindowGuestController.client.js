@@ -1,6 +1,5 @@
 console.log("Script executed");
 var searchResults = JSON.parse(rawData).businesses;
-console.log(rsvpArray);
 var length = searchResults.length;
 var latitude = 0;
 var longitude = 0;
@@ -10,32 +9,7 @@ var marker;
 var map;
 
 function confirmRsvp(){
-    console.log(currentIndex+" "+searchResults[currentIndex].id);
-//    $('.confirmButton')
-    $.ajax({
-        url:'/confirmRsvp',
-        type:'post',
-        data:'value='+searchResults[currentIndex].id,
-        success:function(serverData){
-            console.log("client received response");
-            console.log(serverData);
-            rsvpArray[currentIndex] = (true)?false:true;
-            var idString = '#rsvp'+currentIndex;
-            var rsvpNumberString = '#rsvpNumber'+currentIndex;
-            if($(idString).hasClass('rsvpButton')){
-                $(idString).removeClass('rsvpButton').addClass('rsvpButtonActive');
-                $('#confirm').removeClass('confirmButton').addClass('confirmButtonActive');
-                $(rsvpNumberString).html(Number($(rsvpNumberString).text())+1);
-                rsvpArray[currentIndex] = true;
-            }
-            else{
-                $(idString).removeClass('rsvpButtonActive').addClass('rsvpButton');
-                $('#confirm').removeClass('confirmButtonActive').addClass('confirmButton');
-                $(rsvpNumberString).html(Number($(rsvpNumberString).text())-1);
-                rsvpArray[currentIndex] = false;
-            }
-        }
-    });
+    
 }
 
 function initMap() {
@@ -63,12 +37,6 @@ function openRsvpWindow(index){
     $('.addressTwo').html(searchResults[indexNum].location.city+', '+searchResults[indexNum].location.zip_code);
     $('.infoPhone').html(searchResults[indexNum].display_phone)
     $('#windowRatingReviews').html(searchResults[indexNum].review_count+" Reviews");
-    if(rsvpArray[indexNum]==true){
-        $('#confirm').removeClass('confirmButton').addClass('confirmButtonActive');
-    }
-    else{
-        $('#confirm').removeClass('confirmButtonActive').addClass('confirmButton');
-    }
     
     switch(searchResults[indexNum].rating){
         case 1: $('#windowRatingImage').attr('src','../public/img/small_1.png'); break;

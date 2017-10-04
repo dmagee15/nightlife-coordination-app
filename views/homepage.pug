@@ -9,10 +9,18 @@ html
           if user != null
             h3 Welcome, 
               span(style='color:lightblue') #{user.displayName}!
+            if user.search != 0
+              a(href='/previoussearch')
+                h2(id='previousSearch') Previous Search
         h1 Plan your nights out. Coordinate with Friends.
-        form#locationForm(action='/search', method='POST')
-            input#location(type='text', name='location', placeholder='Where are you located?')
-            input#locationSubmit(type='submit', value='Search')
+        if user != null
+          form#locationForm(action='/search', method='POST')
+              input#location(type='text', name='location', placeholder='Where are you located?')
+              input#locationSubmit(type='submit', value='Search')
+        else
+          form#locationForm(action='/guestsearch', method='POST')
+              input#location(type='text', name='location', placeholder='Where are you located?')
+              input#locationSubmit(type='submit', value='Search')
         if user != null
           a.loginButton(href="/logout")
             h2 Logout

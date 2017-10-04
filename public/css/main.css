@@ -216,9 +216,18 @@ span {
 	text-align:right;
 }
 .mainHeader h3{
-	margin:0;
-	padding: 5px 50px 0 0;
+	margin:5px 12px 0 0;
+	padding-right: 10px;
+	display:inline-block;
 	color:black;
+}
+#previousSearch{
+	display:inline-block;
+	font-size:20px;
+	padding: 0 0 0 22px;
+	border-left:2px solid black;
+	margin:5px 50px 0 0;
+	color:lightgreen;
 }
 .main h1{
 	color:white;
