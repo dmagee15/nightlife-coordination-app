@@ -1,7 +1,6 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var RsvpHandler = require(path + '/app/controllers/rsvpHandler.server.js');
 var Users = require('../models/users.js');
 
@@ -27,7 +26,6 @@ module.exports = function (app, passport, yelp) {
 		}
 	}
 
-	var clickHandler = new ClickHandler();
 	var rsvpHandler = new RsvpHandler();
 	
 	app.route('/')
@@ -80,7 +78,8 @@ module.exports = function (app, passport, yelp) {
 					
 					res.render('guestsearch', {
 				 	results: adjustedData,
-				 	raw: data
+				 	raw: data,
+				 	mapkey: process.env.GOOGLE_MAP
 				 });
 					
 				});
@@ -151,7 +150,8 @@ module.exports = function (app, passport, yelp) {
 				 	results: adjustedData,
 				 	raw: data,
 				 	rsvp: JSON.stringify(resultArray),
-				 	user: req.user
+				 	user: req.user,
+				 	mapkey: process.env.GOOGLE_MAP
 				 });
 					
 				});
@@ -226,7 +226,8 @@ module.exports = function (app, passport, yelp) {
 				 	results: adjustedData,
 				 	raw: data,
 				 	rsvp: JSON.stringify(resultArray),
-				 	user: req.user
+				 	user: req.user,
+				 	mapkey: process.env.GOOGLE_MAP
 				 });
 					
 				});
@@ -272,8 +273,4 @@ module.exports = function (app, passport, yelp) {
 	app.route('/confirmRsvp')
 		.post(isLoggedIn, rsvpHandler.confirmRsvp);
 
-	app.route('/api/:id/clicks')
-		.get(isLoggedIn, clickHandler.getClicks)
-		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks);
 };

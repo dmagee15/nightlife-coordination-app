@@ -58,7 +58,7 @@ function openRsvpWindow(index){
     var head= document.getElementsByTagName('head')[0];
     var script= document.createElement('script');
     script.type= 'text/javascript';
-    script.src= 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC1munvl4oBFHvOEqxudlejjo_HNMeh4pQ&callback=initMap';
+    script.src= 'https://maps.googleapis.com/maps/api/js?key='+map_key+'&callback=initMap';
     head.appendChild(script);
     }
     else{
