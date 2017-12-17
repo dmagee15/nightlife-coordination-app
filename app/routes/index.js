@@ -54,6 +54,7 @@ module.exports = function (app, passport, yelp) {
 				 		results: adjustedData,
 				 		raw: data,
 				 		mapkey: process.env.GOOGLE_MAP
+						});
 					}
 					else{
 					var allRecordsLength = (allRecords.length)?allRecords.length:1;
