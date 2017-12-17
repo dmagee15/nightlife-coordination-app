@@ -49,6 +49,13 @@ module.exports = function (app, passport, yelp) {
 				
 				Users.find({}, function(err,allRecords){
 					if(err) throw err;
+					if(allRecords[0]==undefined){
+						res.render('guestsearch', {
+				 		results: adjustedData,
+				 		raw: data,
+				 		mapkey: process.env.GOOGLE_MAP
+					}
+					else{
 					var allRecordsLength = (allRecords.length)?allRecords.length:1;
 					var tempArray = [];
 					for(var u=0;u<allRecordsLength;u++){
@@ -69,8 +76,8 @@ module.exports = function (app, passport, yelp) {
 				 	results: adjustedData,
 				 	raw: data,
 				 	mapkey: process.env.GOOGLE_MAP
-				 });
-					
+					});
+					}
 				});
 				
 					

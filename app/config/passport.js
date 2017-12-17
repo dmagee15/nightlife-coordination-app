@@ -51,7 +51,7 @@ module.exports = function (passport) {
 	passport.use(new GoogleStrategy({
     clientID: configAuth.googleAuth.clientID,
     clientSecret: configAuth.googleAuth.clientSecret,
-    callbackURL: "https://nightlife-coordination-app-dmagee15.c9users.io/oauth2callback"
+    callbackURL: configAuth.googleAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOne({ 'id': profile.id }, function (err, user) {
