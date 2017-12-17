@@ -5,18 +5,7 @@ var RsvpHandler = require(path + '/app/controllers/rsvpHandler.server.js');
 var Users = require('../models/users.js');
 
 module.exports = function (app, passport, yelp) {
-	
-/*	var newUser = new Users();
-					newUser.id = 3824378232819;
-					newUser.username = 'krayk333';
-					newUser.displayName = 'Sam Carter';
-					newUser.rsvp = ['rachels-cafe-houston','crispy-or-grilled-houston'];
-					newUser.save(function (err) {
-						if (err) {
-							throw err;
-						}console.log("SAVED USER");});*/
-						
-//	Users.find({'displayName':'David M'}).remove().exec();
+
 	
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -43,7 +32,7 @@ module.exports = function (app, passport, yelp) {
 		
 	app.route('/guestsearch')
 		.post(function(req,res){
-			yelp.search({term: 'food', location: req.body.location, price: '1,2,3', limit: 15})
+			yelp.search({term: 'bar', location: req.body.location, price: '1,2,3', limit: 15})
 			.then(function (data) {
 					var adjustedData = JSON.parse(data).businesses;
 				 var length = adjustedData.length;
@@ -96,7 +85,7 @@ module.exports = function (app, passport, yelp) {
 		});
 	app.route('/previoussearch')
 		.get(function(req,res){
-			yelp.search({term: 'food', location: req.user.search, price: '1,2,3', limit: 15})
+			yelp.search({term: 'bar', location: req.user.search, price: '1,2,3', limit: 15})
 			.then(function (data) {
 					var adjustedData = JSON.parse(data).businesses;
 				 var length = adjustedData.length;
@@ -170,7 +159,7 @@ module.exports = function (app, passport, yelp) {
 		
 	app.route('/search')
 		.post(function(req,res){
-			yelp.search({term: 'food', location: req.body.location, price: '1,2,3', limit: 15})
+			yelp.search({term: 'bar', location: req.body.location, price: '1,2,3', limit: 15})
 			.then(function (data) {
 				Users.update({'displayName':req.user.displayName},{$set: {'search':req.body.location}}, function(err,main){
 					if(err)throw err;

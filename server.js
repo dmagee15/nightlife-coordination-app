@@ -10,7 +10,7 @@ var path = require('path');
 var Yelp = require('yelp-api-v3');
 
 var app = express();
-require('dotenv').load();
+//require('dotenv').load();
 require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);
