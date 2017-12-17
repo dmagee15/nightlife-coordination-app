@@ -77,6 +77,11 @@ $('.rsvpWindowContainer').on('click',function(){
    $('.rsvpWindowContainer').fadeOut('slow');
 });
 
+$('.exitButton').on('click',function(){
+   $('.rsvpWindow').fadeOut('slow');
+   $('.rsvpWindowContainer').fadeOut('slow');
+});
+
 function closeRsvpWindow(){
 
 //    document.getElementById('rsvpWindowId').style.display = "none";
