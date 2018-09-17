@@ -1,6 +1,9 @@
 {
   "name": "clementinejs-fcc",
   "version": "1.0.1",
+  "engines": {
+    "node": "9.5.0"
+  },
   "description": "The elegant and lightweight boilerplate for full stack JavaScript.",
   "main": "server.js",
   "repository": {
