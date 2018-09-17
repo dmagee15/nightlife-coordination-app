@@ -7,7 +7,7 @@ var passport = require('passport');
 var session = require('express-session');
 var bodyparser = require('body-parser');
 var path = require('path');
-var Yelp = require('yelp-api-v3');
+var Yelp = require('yelp-fusion');
 
 var app = express();
 require('dotenv').load();
@@ -33,12 +33,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var yelp = new Yelp({
-  app_id: 'Q5xEsdg0B5kTGu5wm6d2AA',
-  app_secret: 'uAdAPQonOBMsPA1Xy730dU7uZXElgUfT3amVV0ZTvSeLnK3jssvP4jkxjztfQ6n9'
-});
+// var yelp = new Yelp({
+//   app_id: 'Q5xEsdg0B5kTGu5wm6d2AA',
+//   app_secret: 'uAdAPQonOBMsPA1Xy730dU7uZXElgUfT3amVV0ZTvSeLnK3jssvP4jkxjztfQ6n9'
+// });
 
-routes(app, passport, yelp);
+var client = Yelp.client(process.env.YELP_API_KEY);
+
+routes(app, passport, client);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {

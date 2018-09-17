@@ -203,12 +203,13 @@ span {
 	margin: 0;
 }
 .main{
-	min-height:800px;
+	min-height:100vh;
 	width:100%;
 	background:url('../img/john-price-4977.jpg');
 	background-size: cover;
 	text-align:center;
 	overflow:hidden;
+	position: relative;
 }
 .mainHeader{
 	width:100%;
@@ -229,12 +230,24 @@ span {
 	margin:5px 50px 0 0;
 	color:lightgreen;
 }
-.main h1{
+.contentContainer{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.contentContainer h1{
 	color:white;
-	padding-top:150px;
+}
+form{
+	white-space: nowrap;
 }
 #location{
 	width:400px;
+	display: inline-block;
+}
+#locationSubmit{
+	display: inline-block;
 }
 .loginButton{
 	text-decoration:none;
@@ -339,6 +352,7 @@ span {
 	border-radius:15px;
 	overflow:hidden;
 	box-shadow:3px 3px 3px 0;
+	cursor: pointer;
 }
 .rsvpButtonActive{
 	margin:12px auto 0 auto;
@@ -348,6 +362,7 @@ span {
 	border-radius:15px;
 	overflow:hidden;
 	box-shadow:3px 3px 3px 0;
+	cursor: pointer;
 }
 .rsvpButton p{
 	margin:0;
@@ -400,6 +415,8 @@ span {
 	background-color:black;
 	width:20px;
 	float:right;
+	cursor: pointer;
+	color: white;
 }
 .rsvpWindowMap{
 	width:500px;
@@ -459,6 +476,7 @@ span {
 	background-color:darkblue;
 	border-radius:15px;
 	overflow:hidden;
+	cursor: pointer;
 	box-shadow:3px 3px 3px 0;
 }
 .confirmButton p{
@@ -471,6 +489,7 @@ span {
 	margin:25px auto 0 auto;
 	width:65px;
 	height:50px;
+	cursor: pointer;
 	background-color:green;
 	border-radius:15px;
 	overflow:hidden;

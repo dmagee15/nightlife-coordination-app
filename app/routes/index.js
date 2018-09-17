@@ -34,7 +34,8 @@ module.exports = function (app, passport, yelp) {
 		.post(function(req,res){
 			yelp.search({term: 'bar', location: req.body.location, price: '1,2,3', limit: 15})
 			.then(function (data) {
-					var adjustedData = JSON.parse(data).businesses;
+					var adjustedData = data.jsonBody.businesses;
+					console.log(adjustedData);
 				 var length = adjustedData.length;
 				 for(var x=0;x<length;x++){
 				 	adjustedData[x].distance = Math.floor(adjustedData[x].distance);
@@ -95,7 +96,7 @@ module.exports = function (app, passport, yelp) {
 		.get(function(req,res){
 			yelp.search({term: 'bar', location: req.user.search, price: '1,2,3', limit: 15})
 			.then(function (data) {
-					var adjustedData = JSON.parse(data).businesses;
+					var adjustedData = data.jsonBody.businesses;
 				 var length = adjustedData.length;
 				 for(var x=0;x<length;x++){
 				 	adjustedData[x].distance = Math.floor(adjustedData[x].distance);
@@ -171,7 +172,7 @@ module.exports = function (app, passport, yelp) {
 			.then(function (data) {
 				Users.update({'displayName':req.user.displayName},{$set: {'search':req.body.location}}, function(err,main){
 					if(err)throw err;
-					var adjustedData = JSON.parse(data).businesses;
+					var adjustedData = data.jsonBody.businesses;
 				 var length = adjustedData.length;
 				 for(var x=0;x<length;x++){
 				 	adjustedData[x].distance = Math.floor(adjustedData[x].distance);

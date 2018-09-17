@@ -1,5 +1,5 @@
 console.log("Script executed");
-var searchResults = JSON.parse(rawData).businesses;
+var searchResults = rawData.jsonBody.businesses;
 var length = searchResults.length;
 var latitude = 0;
 var longitude = 0;

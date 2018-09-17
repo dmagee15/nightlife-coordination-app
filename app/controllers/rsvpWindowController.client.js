@@ -1,4 +1,4 @@
-var searchResults = JSON.parse(rawData).businesses;
+var searchResults = rawData.jsonBody.businesses;
 console.log(rsvpArray);
 var length = searchResults.length;
 var latitude = 0;

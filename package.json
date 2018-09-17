@@ -36,6 +36,8 @@
     "passport-google-plus-token": "^2.1.0",
     "path": "^0.12.7",
     "pug": "^2.0.0-rc.4",
-    "yelp-api-v3": "^1.5.0"
+    "yelp-api-v3": "^1.5.0",
+    "yelp-fusion": "^2.2.1",
+    "yelpv3": "^1.2.1"
   }
 }
